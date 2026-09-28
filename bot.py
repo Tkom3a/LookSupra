@@ -41,11 +41,11 @@ def _parse_decimal_list(value: str, name: str) -> List[Decimal]:
     return sorted(set(prices))
 
 
-class LookQuaiBot:
+class LookSupraBot:
     def __init__(self):
         self.telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
         self.telegram_channel = os.getenv('TELEGRAM_CHANNEL')  # Изменено с CHAT_ID
-        self.symbol = os.getenv('SYMBOL', 'QUAIUSDT')
+        self.symbol = os.getenv('SYMBOL', 'SUPRAUSDT')
         self.lookback_minutes = int(os.getenv('LOOKBACK_MINUTES', '5'))
         self.threshold_up = float(os.getenv('THRESHOLD_UP', '4.0'))
         self.threshold_down = float(os.getenv('THRESHOLD_DOWN', '4.0'))
@@ -67,7 +67,7 @@ class LookQuaiBot:
         self._prev_price: Optional[Decimal] = None
         self._step_anchor: Optional[Decimal] = None
         
-        logger.info(f"LookQuai bot initialized with symbol: {self.symbol}")
+        logger.info(f"LookSupra bot initialized with symbol: {self.symbol}")
         logger.info(f"Channel: {self.telegram_channel}")
         logger.info(f"Threshold UP: {self.threshold_up}% | Threshold DOWN: {self.threshold_down}% over {self.lookback_minutes} minutes")
         if self.price_step:
@@ -137,7 +137,7 @@ class LookQuaiBot:
             self._remember_price(current_price)
         
         welcome_msg = f"""
-🤖 LookQuai - Bot Started
+🤖 LookSupra - Bot Started
 
 ✅ Monitoring active
 📊 Pair: {self.symbol}
@@ -332,7 +332,7 @@ Current: ${self._fmt_price(current)}
                 logger.info(f"Target alert sent: {target} ({side})")
     
     async def run(self, interval_seconds: int = 60):
-        logger.info("Starting LookQuai monitoring bot")
+        logger.info("Starting LookSupra monitoring bot")
         await self.send_welcome_message()
         
         check_count = 0
@@ -367,12 +367,12 @@ Current: ${self._fmt_price(current)}
     
     async def close(self):
         self.is_running = False
-        await self.send_telegram_message("🛑 LookQuai - Bot Stopped")
-        logger.info("LookQuai bot stopped")
+        await self.send_telegram_message("🛑 LookSupra - Bot Stopped")
+        logger.info("LookSupra bot stopped")
 
 
 async def main():
-    bot = LookQuaiBot()
+    bot = LookSupraBot()
     try:
         await bot.run()
     finally:

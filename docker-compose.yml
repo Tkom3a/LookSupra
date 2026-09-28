@@ -1,7 +1,7 @@
 services:
-  lookquai-bot:
+  looksupra-bot:
     build: .
-    container_name: lookquai-bot
+    container_name: looksupra-bot
     restart: unless-stopped
     env_file:
       - .env

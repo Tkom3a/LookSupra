@@ -1,4 +1,4 @@
 docker compose down -v
-docker rmi lookquai-bot
+docker rmi looksupra-looksupra-bot:latest
 cd ..
-rm -rf LookQuai
+rm -rf LookSupra
