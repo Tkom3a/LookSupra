@@ -1,0 +1,15 @@
+services:
+  lookquai-bot:
+    build: .
+    container_name: lookquai-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - TZ=UTC
+      - PYTHONUNBUFFERED=1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
